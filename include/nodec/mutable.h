@@ -9,9 +9,8 @@ namespace nodec {
 
 template<typename T>
 class Mutable
-    : private NonCopyable<Mutable<T> >
-    , public Clonable<T>
-    , public Object {
+    : private NonCopyable<T>
+    , public Clonable<T> {
 };
 
 }

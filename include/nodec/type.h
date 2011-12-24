@@ -6,30 +6,24 @@
 #ifdef NODEC_USE_SP
 #include "shared_ptr.h"
 #endif
+#include "immutable.h"
 
 namespace nodec {
 
 typedef uintptr_t TypeId;
 
-#ifdef NODEC_USE_SP
 template<typename T>
 class Type {
 public:
+#ifdef NODEC_USE_SP
     typedef typename SharedPtr<T>::Type Ptr;
     typedef typename SharedPtr<const T>::Type Cptr;
-    
-    TypeId id();
-};
 #else
-template<typename T>
-class Type {
-public:
     typedef T* Ptr;
     typedef const T* Cptr;
-    
+#endif
     TypeId id();
 };
-#endif
 
 template<typename T>
 TypeId Type<T>::id() {

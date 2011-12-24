@@ -1,8 +1,6 @@
 #ifndef _NODEC_NONCOPYABLE_H_
 #define _NODEC_NONCOPYABLE_H_
 
-#include "object.h"
-
 namespace nodec {
 
 template<typename T>

@@ -1,11 +1,11 @@
 #ifndef _NODEC_ARRAY_H_
 #define _NODEC_ARRAY_H_
 
-#include "mutable.h"
+#include "mutable_object.h"
 
 namespace nodec {
 
-class Array : public Mutable<Array> {
+class Array : public MutableObject<Array> {
 public:
     static Type<Array>::Ptr create();
     

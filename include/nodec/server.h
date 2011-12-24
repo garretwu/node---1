@@ -1,12 +1,12 @@
 #ifndef _NODEC_SERVER_H_
 #define _NODEC_SERVER_H_
 
-#include "mutable.h"
+#include "mutable_object.h"
 #include "string.h"
 
 namespace nodec {
 
-class Server : public Mutable<Server> {
+class Server : public MutableObject<Server> {
 public:
     static Type<Server>::Ptr create();
     

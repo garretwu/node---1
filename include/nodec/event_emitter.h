@@ -1,15 +1,16 @@
 #ifndef _NODEC_EVENT_EMITTER_H_
 #define _NODEC_EVENT_EMITTER_H_
 
-#include "mutable.h"
-#include "string.h"
-#include "function.h"
-#include "array.h"
+#include "mutable_object.h"
 
 namespace nodec {
 
+class String;
+class Function;
+class Array;
+
 template<typename T>
-class EventEmitter : public Mutable<EventEmitter<T> > {
+class EventEmitter : public MutableObject<T> {
 public:
     virtual void addListener(Type<String>::Cptr event, Type<Function>::Ptr func) = 0;
     virtual void on(Type<String>::Cptr event, Type<Function>::Ptr func) = 0;

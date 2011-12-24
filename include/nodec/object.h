@@ -6,7 +6,9 @@
 
 namespace nodec {
 
-class Object : public GCBase, public Stringifiable {
+class Object
+    : public GCBase
+    , public Stringifiable {
 };
 
 }

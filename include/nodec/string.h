@@ -1,11 +1,11 @@
 #ifndef _NODEC_STRING_H_
 #define _NODEC_STRING_H_
 
-#include "immutable.h"
+#include "immutable_object.h"
 
 namespace nodec {
 
-class String : public Immutable<String> {
+class String : public ImmutableObject<String> {
 public:
     static Type<String>::Cptr create(const char*);
 

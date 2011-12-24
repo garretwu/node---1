@@ -1,13 +1,12 @@
 #ifndef _NODEC_SINGLETON_H_
 #define _NODEC_SINGLETON_H_
 
-#include "type.h"
-#include "object.h"
+#include "immutable_object.h"
 
 namespace nodec {
 
 template<typename T>
-class Singleton : public Object {
+class Singleton : public ImmutableObject<T> {
 public:
     static T* get() {
         if (!instance_)
@@ -24,9 +23,6 @@ protected:
     Singleton() {}
 
 private:
-    Singleton(const Singleton&);
-    Singleton& operator=(const Singleton&);
-    
     static T* instance_;
 };
 

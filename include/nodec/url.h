@@ -1,12 +1,12 @@
 #ifndef _NODEC_URL_H_
 #define _NODEC_URL_H_
 
-#include "mutable.h"
+#include "mutable_object.h"
 #include "string.h"
 
 namespace nodec {
 
-class Url : public Mutable<Url> {
+class Url : public MutableObject<Url> {
 public:
     static Type<Url>::Ptr create();
     
