@@ -1,11 +1,11 @@
 #ifndef _NODEC_BUFFER_H_
 #define _NODEC_BUFFER_H_
 
-#include "mutable_object.h"
+#include "mutable.h"
 
 namespace nodec {
 
-class Buffer : public MutableObject<Buffer> {
+class Buffer : MUTABLE(Buffer)
 public:
 };
 

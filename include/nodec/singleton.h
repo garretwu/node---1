@@ -1,12 +1,14 @@
 #ifndef _NODEC_SINGLETON_H_
 #define _NODEC_SINGLETON_H_
 
-#include "immutable_object.h"
+#include "immutable.h"
 
 namespace nodec {
 
 template<typename T>
-class Singleton : public ImmutableObject<T> {
+class Singleton
+    : public Single
+    , public ImmutableObject<T> {
 public:
     static T* get() {
         if (!instance_)
@@ -28,6 +30,12 @@ private:
 
 template <typename T>
 T* Singleton<T>::instance_ = 0;
+
+#define SINGLETON(T) public Singleton<T> { \
+private: \
+    friend class Singleton<T>; \
+    T() : Singleton<T>() {} \
+    ~T() {} \
 
 }
 

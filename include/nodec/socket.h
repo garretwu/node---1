@@ -5,9 +5,9 @@
 
 namespace nodec {
 
-class Socket : public EventEmitter<Socket> {
+class Socket : EVENT_EMITTER(Socket)
 public:
-    static Type<Socket>::Ptr create();
+    static Ptr create();
     
     virtual void connect(int) = 0;
     virtual void write(Type<String>::Cptr) = 0;

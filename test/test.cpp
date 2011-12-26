@@ -74,16 +74,18 @@ public:
 
 Type<Server>::Ptr Server::create() { Type<Server>::Ptr p(new ServerImpl()); return p; }
 
-Type<Server>::Ptr HttpModule::createServer() { return Server::create(); }
+Type<Server>::Ptr HttpModule::createServer() const { return Server::create(); }
 Type<String>::Cptr HttpModule::toString() { return String::create(""); }
 
 }
 
 #include <iostream>
+#include <nodec/ascii_string.h>
 
 int main() {
     using namespace std;
     using namespace nodec;
+    using namespace boost;
     
 #ifdef BOEHM_GC_INIT
     GC_INIT();
@@ -96,7 +98,7 @@ int main() {
 //    ArrayImpl bi = ai;
 
     a->push(7);
-    int i = boost::any_cast<int>(a->get(0));
+    int i = any_cast<int>(a->get(0));
     cout << a->length() << " "
 #ifdef NODEC_USE_SP
          << a.use_count()
@@ -110,15 +112,15 @@ int main() {
          << a.use_count()
 #endif
          << endl;
-    cout << boost::any_cast<int>(a->get(0)) << " "
-         << boost::any_cast<int>(a->get(1)) << " "
-         << boost::any_cast<int>(a->get(2)) << endl;
+    cout << any_cast<int>(a->get(0)) << " "
+         << any_cast<int>(a->get(1)) << " "
+         << any_cast<int>(a->get(2)) << endl;
          
 //  error: singleton
 //    new HttpModule();
 
 
-    Type<HttpModule>::Ptr http = HttpModule::get();
+    Type<HttpModule>::Cptr http = HttpModule::get();
 #ifdef INFINITE_LOOP
     while (1)
 #endif

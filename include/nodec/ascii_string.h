@@ -7,9 +7,7 @@ namespace nodec {
 
 class AsciiString : public String {
 public:
-    static Type<AsciiString>::Cptr create(const char*);
-    
-    // TODO: there are many other methods.
+    static Cptr create(const char*);
 };
 
 }

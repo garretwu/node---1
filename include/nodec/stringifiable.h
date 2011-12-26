@@ -13,7 +13,7 @@ protected:
     ~Stringifiable() {}
 
 public:
-    virtual Type<String>::Cptr toString() = 0;
+    virtual NODEC_CPTR(String) toString() = 0;
 };
 
 }

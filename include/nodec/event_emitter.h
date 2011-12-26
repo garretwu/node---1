@@ -1,13 +1,11 @@
 #ifndef _NODEC_EVENT_EMITTER_H_
 #define _NODEC_EVENT_EMITTER_H_
 
-#include "mutable_object.h"
+#include "string.h"
+#include "function.h"
+#include "array.h"
 
 namespace nodec {
-
-class String;
-class Function;
-class Array;
 
 template<typename T>
 class EventEmitter : public MutableObject<T> {
@@ -21,6 +19,11 @@ public:
     virtual void emit(Type<String>::Cptr event, Type<Array>::Cptr args) = 0;
     virtual Type<Array>::Ptr listeners(Type<String>::Cptr event) = 0;
 };
+
+#define EVENT_EMITTER(T) public EventEmitter<T> { \
+public: \
+    typedef NODEC_PTR(T) Ptr; \
+    typedef NODEC_CPTR(T) Cptr; \
 
 }
 

@@ -1,13 +1,13 @@
 #ifndef _NODEC_ARRAY_H_
 #define _NODEC_ARRAY_H_
 
-#include "mutable_object.h"
+#include "mutable.h"
 
 namespace nodec {
 
-class Array : public MutableObject<Array> {
+class Array : MUTABLE(Array)
 public:
-    static Type<Array>::Ptr create();
+    static Ptr create();
     
     virtual size_t length() const = 0;
     virtual void set(size_t, Value) = 0;
@@ -16,7 +16,7 @@ public:
     virtual void unshift(Value) = 0;
     virtual void push(Value) = 0;
     virtual Value pop() = 0;
-    virtual Type<Array>::Ptr concat(Type<Array>::Cptr) = 0;
+    virtual Ptr concat(Cptr) = 0;
 };
 
 }
