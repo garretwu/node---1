@@ -12,7 +12,7 @@ protected:
     ~Clonable() {}
     
 public:
-    virtual typename NODEC_PTR(T) clone() = 0;
+    virtual NODEC_PTR_TYPE(T) clone() = 0;
 };
 
 }

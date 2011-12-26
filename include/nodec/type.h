@@ -58,9 +58,13 @@ TypeId Type<T, B1, B2>::id() {
 #ifdef NODEC_USE_SP
 #define NODEC_PTR(T) SharedPtr<T>::Type
 #define NODEC_CPTR(T) SharedPtr<const T>::Type
+#define NODEC_PTR_TYPE(T) typename SharedPtr<T>::Type
+#define NODEC_CPTR_TYPE(T) typename SharedPtr<const T>::Type
 #else
 #define NODEC_PTR(T) T*
 #define NODEC_CPTR(T) const T*
+#define NODEC_PTR_TYPE(T) T*
+#define NODEC_CPTR_TYPE(T) const T*
 #endif
 
 }
