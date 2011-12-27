@@ -9,7 +9,6 @@ class String : IMMUTABLE(String)
 public:
     static Cptr create(const char*);
 
-public:
     virtual Cptr charAt(int) = 0;
     virtual Cptr substring(int) = 0;
     virtual Cptr substring(int, int) = 0;

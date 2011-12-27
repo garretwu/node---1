@@ -3,8 +3,7 @@
 //g++ -DNODEC_USE_BOEHM_GC -I../include -I../deps/ test.cpp -lgc
 
 #include <nodec/array.h>
-#include <nodec/server.h>
-#include <nodec/http_module.h>
+#include <nodec/http_server.h>
 
 #include <vector>
 #include <iostream>
@@ -59,28 +58,24 @@ public:
 
 Type<Array>::Ptr Array::create() { Type<Array>::Ptr p(new ArrayImpl()); return p; }
 
-class ServerImpl : public Server {
+class HttpServerImpl : public HttpServer {
 public:
     void listen(int) {}
     void listen(Type<String>::Cptr) {}
     void close() {}
-    Type<Server>::Ptr clone() { Type<Server>::Ptr p(new ServerImpl()); return p; }
+    Type<HttpServer>::Ptr clone() { Type<HttpServer>::Ptr p(new HttpServerImpl()); return p; }
     Type<String>::Cptr toString() { return String::create(""); }
     
-    ~ServerImpl() {
-        std::cout << "destroy ServerImpl" << std::endl;
+    ~HttpServerImpl() {
+        std::cout << "destroy HttpServerImpl" << std::endl;
     }
 };
 
-Type<Server>::Ptr Server::create() { Type<Server>::Ptr p(new ServerImpl()); return p; }
-
-Type<Server>::Ptr HttpModule::createServer() const { return Server::create(); }
-Type<String>::Cptr HttpModule::toString() { return String::create(""); }
+Type<HttpServer>::Ptr HttpServer::create() { Type<HttpServer>::Ptr p(new HttpServerImpl()); return p; }
 
 }
 
 #include <iostream>
-#include <nodec/ascii_string.h>
 
 int main() {
     using namespace std;
@@ -115,17 +110,15 @@ int main() {
     cout << any_cast<int>(a->get(0)) << " "
          << any_cast<int>(a->get(1)) << " "
          << any_cast<int>(a->get(2)) << endl;
-         
+
 //  error: singleton
 //    new HttpModule();
 
-
-    Type<HttpModule>::Cptr http = HttpModule::get();
 #ifdef INFINITE_LOOP
     while (1)
 #endif
     {
-        Type<Server>::Ptr s = http->createServer();
+        Type<HttpServer>::Ptr s = HttpServer::create();
     }
 
 #if NODEC_USE_BOEHM_BC    

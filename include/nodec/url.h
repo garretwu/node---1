@@ -8,19 +8,20 @@ namespace nodec {
 
 class Url : MUTABLE(Url)
 public:
-    static Ptr create();
+    static Ptr parse(Type<String>::Cptr);
+    static Type<String>::Cptr format(Cptr);
     
-    Type<String>::Cptr getHref();
-    Type<String>::Cptr getProtocol();
-    Type<String>::Cptr getHost();
-    Type<String>::Cptr getAuth();
-    Type<String>::Cptr getHostName();
-    Type<String>::Cptr getPort();
-    Type<String>::Cptr getPathName();
-    Type<String>::Cptr getSearch();
-    Type<String>::Cptr getPath();
-    Type<String>::Cptr getQuery();
-    Type<String>::Cptr getHash();
+    virtual Type<String>::Cptr getHref() = 0;
+    virtual Type<String>::Cptr getProtocol() = 0;
+    virtual Type<String>::Cptr getHost() = 0;
+    virtual Type<String>::Cptr getAuth() = 0;
+    virtual Type<String>::Cptr getHostName() = 0;
+    virtual Type<String>::Cptr getPort() = 0;
+    virtual Type<String>::Cptr getPathName() = 0;
+    virtual Type<String>::Cptr getSearch() = 0;
+    virtual Type<String>::Cptr getPath() = 0;
+    virtual Type<String>::Cptr getQuery() = 0;
+    virtual Type<String>::Cptr getHash() = 0;
     
     // TODO: setter
 };

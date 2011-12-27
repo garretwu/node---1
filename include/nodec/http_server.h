@@ -1,15 +1,13 @@
-#ifndef _NODEC_SERVER_H_
-#define _NODEC_SERVER_H_
+#ifndef _NODEC_HTTP_SERVER_H_
+#define _NODEC_HTTP_SERVER_H_
 
 #include "mutable.h"
 #include "string.h"
 
 namespace nodec {
 
-class Server : MUTABLE(Server)
+class HttpServer : MUTABLE(HttpServer)
 public:
-    static Ptr create();
-    
     virtual void listen(int) = 0;
     virtual void listen(Type<String>::Cptr) = 0;
     virtual void close() = 0;
@@ -17,4 +15,4 @@ public:
 
 }
 
-#endif // _NODEC_SERVER_H_
+#endif // _NODEC_HTTP_SERVER_H_

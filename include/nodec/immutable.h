@@ -18,6 +18,7 @@ class ImmutableObject
 #define IMMUTABLE(T) public ImmutableObject<T> { \
 public: \
     typedef NODEC_CPTR(T) Cptr; \
+    static Cptr create(); \
 
 }
 

@@ -14,6 +14,7 @@ class Mutable {};
 class Immutable {};
 class Single {};
 
+typedef size_t Size;
 typedef uintptr_t TypeId;
 
 template<typename T

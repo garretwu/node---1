@@ -2,13 +2,17 @@
 #define _NODEC_FUNCTION_H_
 
 #include "mutable.h"
-#include "array.h"
 
 namespace nodec {
 
-class Function : MUTABLE(Function)
+class Function {};
+
+template<typename T>
+class Callable
+    : public Function
+    , public MutableObject<T> {
 public:
-    virtual Value invoke(Type<Array>::Ptr args) = 0;
+    virtual Value call(Value) = 0;
 };
 
 }

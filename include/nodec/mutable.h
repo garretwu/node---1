@@ -21,6 +21,7 @@ class MutableObject
 public: \
     typedef NODEC_PTR(T) Ptr; \
     typedef NODEC_CPTR(T) Cptr; \
+    static Ptr create(); \
 
 }
 

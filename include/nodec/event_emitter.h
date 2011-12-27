@@ -7,8 +7,12 @@
 
 namespace nodec {
 
+class EventEmitter {};
+
 template<typename T>
-class EventEmitter : public MutableObject<T> {
+class EventEmittable
+    : public EventEmitter
+    , public MutableObject<T> {
 public:
     virtual void addListener(Type<String>::Cptr event, Type<Function>::Ptr func) = 0;
     virtual void on(Type<String>::Cptr event, Type<Function>::Ptr func) = 0;
@@ -20,10 +24,11 @@ public:
     virtual Type<Array>::Ptr listeners(Type<String>::Cptr event) = 0;
 };
 
-#define EVENT_EMITTER(T) public EventEmitter<T> { \
+#define EVENT_EMITTER(T) public EventEmittable<T> { \
 public: \
     typedef NODEC_PTR(T) Ptr; \
     typedef NODEC_CPTR(T) Cptr; \
+    static Ptr create(); \
 
 }
 
