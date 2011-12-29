@@ -6,7 +6,7 @@
 
 namespace nodec {
 
-class HttpServer : MUTABLE(HttpServer)
+class HttpServer : NODEC_MUTABLE(HttpServer)
 public:
     virtual void listen(int) = 0;
     virtual void listen(Type<String>::Cptr) = 0;

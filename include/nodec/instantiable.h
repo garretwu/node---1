@@ -5,10 +5,10 @@
 
 namespace nodec {
 
-class Instanciable {
+class Instantiable {
 protected:
-    Instanciable() {}
-    ~Instanciable() {}
+    Instantiable() {}
+    ~Instantiable() {}
 
 public:
     virtual bool instanceOf(TypeId) = 0;
@@ -16,4 +16,4 @@ public:
 
 }
 
-#endif // _NODEC_STRINGIFIABLE_H_
+#endif // _NODEC_INSTANTIABLE_H_

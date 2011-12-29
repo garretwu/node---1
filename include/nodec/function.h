@@ -17,13 +17,15 @@ template<typename T>
 class FunctionBase
     : public Callable
     , public MutableBase<T> {
+public:
+    bool instanceOf(TypeId id) {
+        return id == Type<Function>::id()
+            || MutableBase<T>::instanceOf(id);
+    }
 };
 
-#define FUNCTION(T) public Function, public FunctionBase<T> { \
-public: \
-    typedef NODEC_PTR(T) Ptr; \
-    typedef NODEC_CPTR(T) Cptr; \
-    static Ptr create(); \
+#define NODEC_FUNCTION(T) public Function, public FunctionBase<T> { \
+    NODEC_MUTABLE_DECLS(T)
 
 }
 

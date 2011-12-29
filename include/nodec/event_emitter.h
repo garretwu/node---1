@@ -25,13 +25,15 @@ template<typename T>
 class EventEmitterBase
     : public EventEmittable
     , public MutableBase<T> {
+public:
+    bool instanceOf(TypeId id) {
+        return id == Type<EventEmitter>::id()
+            || MutableBase<T>::instanceOf(id);
+    }
 };
 
-#define EVENT_EMITTER(T) public EventEmitter, public EventEmitterBase<T> { \
-public: \
-    typedef NODEC_PTR(T) Ptr; \
-    typedef NODEC_CPTR(T) Cptr; \
-    static Ptr create(); \
+#define NODEC_EVENT_EMITTER(T) public EventEmitter, public EventEmitterBase<T> { \
+    NODEC_MUTABLE_DECLS(T)
 
 }
 

@@ -6,7 +6,7 @@
 
 namespace nodec {
 
-class Url : MUTABLE(Url)
+class Url : NODEC_MUTABLE(Url)
 public:
     static Ptr parse(Type<String>::Cptr);
     static Type<String>::Cptr format(Cptr);

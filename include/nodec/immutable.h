@@ -1,7 +1,6 @@
 #ifndef _NODEC_IMMUTABLE_H_
 #define _NODEC_IMMUTABLE_H_
 
-#include "type.h"
 #include "value.h"
 #include "object.h"
 #include "gc_base.h"
@@ -11,13 +10,20 @@ namespace nodec {
 template<typename T>
 class ImmutableBase
     : public GCBase
-    , public Object<T> {
+    , public ObjectBase<T> {
+public:
+    bool instanceOf(TypeId id) {
+        return id == Type<Immutable>::id()
+            || ObjectBase<T>::instanceOf(id);
+    }
 };
 
-#define IMMUTABLE(T) public Immutable, public ImmutableBase<T> { \
-public: \
+#define NODEC_IMMUTABLE_DECLS(T) public: \
     typedef NODEC_CPTR(T) Cptr; \
-    static Cptr create(); \
+    static Cptr create();
+
+#define NODEC_IMMUTABLE(T) public Immutable, public ImmutableBase<T> { \
+    NODEC_IMMUTABLE_DECLS(T)
 
 }
 

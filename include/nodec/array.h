@@ -5,7 +5,7 @@
 
 namespace nodec {
 
-class Array : MUTABLE(Array)
+class Array : NODEC_MUTABLE(Array)
 public:
     virtual Size length() const = 0;
     virtual void set(Size, Value) = 0;

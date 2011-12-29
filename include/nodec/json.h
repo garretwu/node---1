@@ -2,11 +2,10 @@
 #define _NODEC_JSON_H_
 
 #include "singleton.h"
-//#include "string.h"
 
 namespace nodec {
 
-class Json : SINGLETON(Json)
+class Json : NODEC_SINGLETON(Json)
 public:
     static Value parse(Type<String>::Cptr);
     static Type<String>::Cptr stringify(Value);

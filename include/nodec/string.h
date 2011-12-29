@@ -5,7 +5,7 @@
 
 namespace nodec {
 
-class String : IMMUTABLE(String)
+class String : NODEC_IMMUTABLE(String)
 public:
     static Cptr create(const char*);
 

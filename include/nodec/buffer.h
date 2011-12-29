@@ -5,7 +5,7 @@
 
 namespace nodec {
 
-class Buffer : MUTABLE(Buffer)
+class Buffer : NODEC_MUTABLE(Buffer)
 public:
 };
 

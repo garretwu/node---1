@@ -125,6 +125,10 @@ int main() {
     
     Json* json = Json::instance();
     json->toString();
+    cout << Type<Json>::id() << endl;
+    cout << json->instanceOf(Type<Json>::id())  << " "
+         << json->instanceOf(Type<Singleton>::id()) << " "
+         << json->instanceOf(Type<Immutable>::id()) << endl;
 
 #if NODEC_USE_BOEHM_BC    
     GC_gcollect();

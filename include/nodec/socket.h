@@ -5,7 +5,7 @@
 
 namespace nodec {
 
-class Socket : EVENT_EMITTER(Socket)
+class Socket : NODEC_EVENT_EMITTER(Socket)
 public:
     virtual void connect(int) = 0;
     virtual void write(Type<String>::Cptr) = 0;
