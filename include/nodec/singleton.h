@@ -4,42 +4,37 @@
 #include "type.h"
 #include "value.h"
 #include "object.h"
-#include "noncopyable.h"
+#include "string.h"
 
 namespace nodec {
 
 template<typename T>
 class SingletonBase
     : public Singleton
-    , private NonCopyable<T>
-    , public Object {
+    , public Object<T> {
 public:
-    static T* get() {
-        if (!instance_)
-            instance_ = new T;
-        return instance_;
+    static T* instance() {
+        static T t;
+        return &t;
     }
     
-    static void reset() {
-        delete instance_;
-        instance_ = 0;
+    Type<String>::Cptr toString() {
+        return String::create();
     }
 
 protected:
     SingletonBase() {}
-
-private:
-    static T* instance_;
+    virtual ~SingletonBase() {}
 };
-
-template <typename T>
-T* SingletonBase<T>::instance_ = 0;
 
 #define SINGLETON(T) public SingletonBase<T> { \
 private: \
     friend class SingletonBase<T>; \
     T() : SingletonBase<T>() {} \
     ~T() {} \
+public: \
+    typedef T* Ptr; \
+    typedef const T* Cptr; \
 
 }
 

@@ -4,14 +4,14 @@
 #include "type.h"
 #include "value.h"
 #include "object.h"
-#include "noncopyable.h"
+#include "gc_base.h"
 
 namespace nodec {
 
 template<typename T>
 class ImmutableBase
-    : private NonCopyable<T>
-    , public Object {
+    : public GCBase
+    , public Object<T> {
 };
 
 #define IMMUTABLE(T) public Immutable, public ImmutableBase<T> { \

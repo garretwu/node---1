@@ -5,15 +5,15 @@
 #include "value.h"
 #include "object.h"
 #include "clonable.h"
-#include "noncopyable.h"
+#include "gc_base.h"
 
 namespace nodec {
 
 template<typename T>
 class MutableBase
-    : public Clonable<T>
-    , private NonCopyable<T>
-    , public Object {
+    : public GCBase
+    , public Clonable<T>
+    , public Object<T> {
 };
 
 #define MUTABLE(T) public Mutable, public MutableBase<T> { \

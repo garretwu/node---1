@@ -1,13 +1,14 @@
 #ifndef _NODEC_OBJECT_H_
 #define _NODEC_OBJECT_H_
 
-#include "gc_base.h"
+#include "noncopyable.h"
 #include "stringifiable.h"
 
 namespace nodec {
 
+template<typename T>
 class Object
-    : public GCBase
+    : private NonCopyable<T>
     , public Stringifiable {
 };
 

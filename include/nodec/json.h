@@ -2,7 +2,7 @@
 #define _NODEC_JSON_H_
 
 #include "singleton.h"
-#include "string.h"
+//#include "string.h"
 
 namespace nodec {
 

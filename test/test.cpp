@@ -4,6 +4,7 @@
 
 #include <nodec/array.h>
 #include <nodec/http_server.h>
+#include <nodec/json.h>
 
 #include <vector>
 #include <iostream>
@@ -32,6 +33,7 @@ public:
     Type<String>::Cptr toString() { Type<String>::Cptr p(new StringImpl()); return p; }
 };
 
+Type<String>::Cptr String::create() { Type<String>::Cptr p (new StringImpl()); return p; }
 Type<String>::Cptr String::create(const char* s) { Type<String>::Cptr p(new StringImpl()); return p; }
 
 class ArrayImpl : public Array {
@@ -45,7 +47,7 @@ public:
     Value pop() { return 0; }
     Type<Array>::Ptr concat(Type<Array>::Cptr) { Type<Array>::Ptr p(new ArrayImpl()); return p; }
     Type<Array>::Ptr clone() { Type<Array>::Ptr p(new ArrayImpl()); return p; }
-    Type<String>::Cptr toString() { return String::create(""); }
+    Type<String>::Cptr toString() { return String::create(); }
     
 private:
     std::vector<Value> vec_;
@@ -64,7 +66,7 @@ public:
     void listen(Type<String>::Cptr) {}
     void close() {}
     Type<HttpServer>::Ptr clone() { Type<HttpServer>::Ptr p(new HttpServerImpl()); return p; }
-    Type<String>::Cptr toString() { return String::create(""); }
+    Type<String>::Cptr toString() { return String::create(); }
     
     ~HttpServerImpl() {
         std::cout << "destroy HttpServerImpl" << std::endl;
@@ -120,6 +122,9 @@ int main() {
     {
         Type<HttpServer>::Ptr s = HttpServer::create();
     }
+    
+    Json* json = Json::instance();
+    json->toString();
 
 #if NODEC_USE_BOEHM_BC    
     GC_gcollect();
