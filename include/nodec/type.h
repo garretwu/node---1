@@ -3,24 +3,45 @@
 
 #include <inttypes.h>
 #include <boost/type_traits/is_base_of.hpp>
-#include "config.h"
+#include "gc_base.h"
 #ifdef NODEC_USE_SP
 #include "shared_ptr.h"
 #endif
 
 namespace nodec {
 
-class Mutable {};
-class Immutable {};
-class Single {};
+enum Category {
+    PRIMITIVE,
+    MUTABLE,
+    IMMUTABLE,
+    SINGLETON,
+    UNDEFINED,
+};
 
-typedef size_t Size;
+class GarbageCollectable {};
+class Mutable   : public GarbageCollectable {};
+class Immutable : public GarbageCollectable {};
+class Singleton : public GarbageCollectable {};
+
 typedef uintptr_t TypeId;
 
-template<typename T
-    , bool = boost::is_base_of<Immutable, T>::value
-    , bool = boost::is_base_of<Single, T>::value>
+template<typename T, Category =
+    boost::is_base_of<GarbageCollectable, T>::value
+        ? boost::is_base_of<Mutable, T>::value
+            ? MUTABLE
+            : boost::is_base_of<Immutable, T>::value
+                ? IMMUTABLE
+                : boost::is_base_of<Singleton, T>::value
+                    ? SINGLETON
+                    : UNDEFINED
+        : PRIMITIVE>
 class Type {
+public:
+    TypeId id();
+};
+
+template<typename T>
+class Type<T, MUTABLE> {
 public:
 #ifdef NODEC_USE_SP
     typedef typename SharedPtr<T>::Type Ptr;
@@ -29,11 +50,10 @@ public:
     typedef T* Ptr;
     typedef const T* Cptr;
 #endif
-    TypeId id();
 };
 
 template<typename T>
-class Type<T, true, false> {
+class Type<T, IMMUTABLE> {
 public:
 #ifdef NODEC_USE_SP
     typedef typename SharedPtr<const T>::Type Cptr;
@@ -44,14 +64,15 @@ public:
 };
 
 template<typename T>
-class Type<T, true, true> {
+class Type<T, SINGLETON> {
 public:
+    typedef T* Ptr;
     typedef const T* Cptr;
     TypeId id();
 };
 
-template<typename T, bool B1, bool B2>
-TypeId Type<T, B1, B2>::id() {
+template<typename T, Category C>
+TypeId Type<T, C>::id() {
     static char c;
     return reinterpret_cast<TypeId>(&c);
 }
@@ -67,6 +88,8 @@ TypeId Type<T, B1, B2>::id() {
 #define NODEC_PTR_TYPE(T) T*
 #define NODEC_CPTR_TYPE(T) const T*
 #endif
+
+typedef size_t Size;
 
 }
 

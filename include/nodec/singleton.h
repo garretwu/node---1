@@ -1,14 +1,18 @@
 #ifndef _NODEC_SINGLETON_H_
 #define _NODEC_SINGLETON_H_
 
-#include "immutable.h"
+#include "type.h"
+#include "value.h"
+#include "object.h"
+#include "noncopyable.h"
 
 namespace nodec {
 
 template<typename T>
-class Singleton
-    : public Single
-    , public ImmutableObject<T> {
+class SingletonBase
+    : public Singleton
+    , private NonCopyable<T>
+    , public Object {
 public:
     static T* get() {
         if (!instance_)
@@ -22,19 +26,19 @@ public:
     }
 
 protected:
-    Singleton() {}
+    SingletonBase() {}
 
 private:
     static T* instance_;
 };
 
 template <typename T>
-T* Singleton<T>::instance_ = 0;
+T* SingletonBase<T>::instance_ = 0;
 
-#define SINGLETON(T) public Singleton<T> { \
+#define SINGLETON(T) public SingletonBase<T> { \
 private: \
-    friend class Singleton<T>; \
-    T() : Singleton<T>() {} \
+    friend class SingletonBase<T>; \
+    T() : SingletonBase<T>() {} \
     ~T() {} \
 
 }

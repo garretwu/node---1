@@ -9,13 +9,12 @@
 namespace nodec {
 
 template<typename T>
-class ImmutableObject
-    : public Immutable
-    , private NonCopyable<T>
+class ImmutableBase
+    : private NonCopyable<T>
     , public Object {
 };
 
-#define IMMUTABLE(T) public ImmutableObject<T> { \
+#define IMMUTABLE(T) public Immutable, public ImmutableBase<T> { \
 public: \
     typedef NODEC_CPTR(T) Cptr; \
     static Cptr create(); \

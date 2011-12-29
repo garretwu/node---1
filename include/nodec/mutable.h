@@ -10,14 +10,13 @@
 namespace nodec {
 
 template<typename T>
-class MutableObject
-    : public Mutable
-    , public Clonable<T>
+class MutableBase
+    : public Clonable<T>
     , private NonCopyable<T>
     , public Object {
 };
 
-#define MUTABLE(T) public MutableObject<T> { \
+#define MUTABLE(T) public Mutable, public MutableBase<T> { \
 public: \
     typedef NODEC_PTR(T) Ptr; \
     typedef NODEC_CPTR(T) Cptr; \

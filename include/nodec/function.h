@@ -5,15 +5,25 @@
 
 namespace nodec {
 
-class Function {};
+class Callable {
+    virtual Value operator()(Value) = 0;
+};
+
+class Function
+    : public Mutable {
+};
 
 template<typename T>
-class Callable
-    : public Function
-    , public MutableObject<T> {
-public:
-    virtual Value call(Value) = 0;
+class FunctionBase
+    : public Callable
+    , public MutableBase<T> {
 };
+
+#define FUNCTION(T) public Function, public FunctionBase<T> { \
+public: \
+    typedef NODEC_PTR(T) Ptr; \
+    typedef NODEC_CPTR(T) Cptr; \
+    static Ptr create(); \
 
 }
 
