@@ -1,23 +1,23 @@
 #ifndef _NODEC_OBJECT_H_
 #define _NODEC_OBJECT_H_
 
+#include "typable.h"
 #include "noncopyable.h"
-#include "instantiable.h"
 #include "stringifiable.h"
 
 namespace nodec {
 
 template<typename T>
 class ObjectBase
-    : private NonCopyable<T>
-    , public Instantiable
-    , public Stringifiable {
+    : public Typable
+    , public Stringifiable
+    , private NonCopyable<T> {
 public:
-    virtual TypeId type() {
+    TypeId type() {
         return Type<T>::id();
     }
 
-    virtual bool instanceOf(TypeId id) {
+    bool instanceOf(TypeId id) {
         return id == Type<Object>::id()
             || id == Type<T>::id();
     }
