@@ -1,6 +1,6 @@
-//g++ -fsyntax-only ../include/nodec/*
-//g++ -I../include -I../deps/ test.cpp
-//g++ -DNODEC_USE_BOEHM_GC -I../include -I../deps/ test.cpp -lgc
+//g++ -I../deps/ -fsyntax-only -fno-rtti -fno-exceptions ../include/nodec/*
+//g++ -I../deps/ -I../include  -fno-rtti -fno-exceptions ../src/* test.cpp
+//g++ -I../deps/ -I../include  -fno-rtti -fno-exceptions -DNODEC_USE_BOEHM_GC ../src/* test.cpp -lgc
 
 #include <nodec/array.h>
 #include <nodec/http_server.h>
@@ -23,18 +23,6 @@
 #endif
 
 namespace nodec {
-
-class StringImpl : public String {
-public:
-    Type<String>::Cptr charAt(int) { Type<String>::Cptr p(new StringImpl()); return p; }
-    Type<String>::Cptr substring(int) { Type<String>::Cptr p(new StringImpl()); return p; }
-    Type<String>::Cptr substring(int, int) { Type<String>::Cptr p(new StringImpl()); return p; }
-    Type<String>::Cptr concat(Type<String>::Cptr) { Type<String>::Cptr p(new StringImpl()); return p; }
-    Type<String>::Cptr toString() { Type<String>::Cptr p(new StringImpl()); return p; }
-};
-
-Type<String>::Cptr String::create() { Type<String>::Cptr p (new StringImpl()); return p; }
-Type<String>::Cptr String::create(const char* s) { Type<String>::Cptr p(new StringImpl()); return p; }
 
 class ArrayImpl : public Array {
 public:    
@@ -95,7 +83,8 @@ int main() {
 //    ArrayImpl bi = ai;
 
     a->push(7);
-    int i = any_cast<int>(a->get(0));
+    int i;
+    to<int>(a->get(0), &i);
     cout << a->length() << " "
 #ifdef NODEC_USE_SP
          << a.use_count()
@@ -109,9 +98,14 @@ int main() {
          << a.use_count()
 #endif
          << endl;
-    cout << any_cast<int>(a->get(0)) << " "
-         << any_cast<int>(a->get(1)) << " "
-         << any_cast<int>(a->get(2)) << endl;
+    int j[3];
+    to<int>(a->get(0), &j[0]);
+    to<int>(a->get(1), &j[1]);
+    to<int>(a->get(2), &j[2]);
+    for (i = 0; i < sizeof(j)/sizeof(int); i++) {
+        cout << j[i] << " ";
+    }
+    cout << endl;
 
 //  error: singleton
 //    new HttpModule();
@@ -123,7 +117,7 @@ int main() {
         Type<HttpServer>::Ptr s = HttpServer::create();
     }
     
-    Json* json = Json::instance();
+    Type<Json>::Ptr json = Json::instance();
     json->toString();
     cout << Type<Json>::id() << endl;
     cout << json->instanceOf(Type<Json>::id())  << " "

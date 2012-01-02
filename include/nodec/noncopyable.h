@@ -11,7 +11,7 @@ protected:
 
 private:
     NonCopyable(const NonCopyable&);
-    T& operator=(const T&);
+    NonCopyable& operator=(const NonCopyable&);
 };
 
 }

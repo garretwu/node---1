@@ -3,8 +3,8 @@
 
 #include "value.h"
 #include "object.h"
-#include "clonable.h"
 #include "gc_base.h"
+#include "clonable.h"
 
 namespace nodec {
 
@@ -12,12 +12,17 @@ template<typename T>
 class MutableBase
     : public GCBase
     , public ObjectBase<T>
-    , public Clonable<T> {
+#ifdef NODEC_USE_EXPLICIT_IF
+    , public Clonable<T>
+#endif
+{
 public:
     bool instanceOf(TypeId id) {
         return id == Type<Mutable>::id()
             || ObjectBase<T>::instanceOf(id);
     }
+    
+    virtual NODEC_PTR_TYPE(T) clone() = 0;
 };
 
 #define NODEC_MUTABLE_DECLS(T) public: \
