@@ -7,6 +7,7 @@
 namespace nodec {
 
 typedef size_t Size;
+typedef uint32_t Char;
 typedef uintptr_t TypeId;
 
 }
