@@ -1,6 +1,4 @@
 //g++ -I../deps/ -fsyntax-only -fno-rtti -fno-exceptions ../include/nodec/*
-//g++ -I../deps/ -I../include  -fno-rtti -fno-exceptions ../src/* test.cpp
-//g++ -I../deps/ -I../include  -fno-rtti -fno-exceptions -DNODEC_USE_BOEHM_GC ../src/* test.cpp -lgc
 
 #include <nodec/array.h>
 #include <nodec/http_server.h>
