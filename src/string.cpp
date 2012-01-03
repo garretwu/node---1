@@ -1,4 +1,4 @@
-#include <string.h>
+#include <string>
 #include <nodec/string.h>
 
 namespace nodec {

@@ -7,7 +7,13 @@
 
 namespace nodec {
 
-class EventEmittable {
+class EventEmitter
+    : public Mutable {
+};
+
+template<typename T>
+class EventEmitterBase
+    : public MutableBase<T> {
 public:
     virtual void addListener(Type<String>::Cptr event, Type<Function>::Ptr func) = 0;
     virtual void removeListerner(Type<String>::Cptr event, Type<Function>::Cptr func) = 0;
@@ -15,17 +21,7 @@ public:
     virtual void removeAllListener(Type<String>::Cptr event);
     virtual void emit(Type<String>::Cptr event, Type<Array>::Cptr args) = 0;
     virtual Type<Array>::Ptr listeners(Type<String>::Cptr event) = 0;
-};
-
-class EventEmitter
-    : public Mutable {
-};
-
-template<typename T>
-class EventEmitterBase
-    : public EventEmittable
-    , public MutableBase<T> {
-public:
+    
     bool instanceOf(TypeId id) const {
         return id == Type<EventEmitter>::id()
             || MutableBase<T>::instanceOf(id);

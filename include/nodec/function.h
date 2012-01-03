@@ -5,19 +5,16 @@
 
 namespace nodec {
 
-class Callable {
-    virtual Value operator()(Value) = 0;
-};
-
 class Function
     : public Mutable {
 };
 
 template<typename T>
 class FunctionBase
-    : public Callable
-    , public MutableBase<T> {
+    : public MutableBase<T> {
 public:
+    virtual Value operator()(Value) = 0;
+    
     bool instanceOf(TypeId id) const {
         return id == Type<Function>::id()
             || MutableBase<T>::instanceOf(id);
