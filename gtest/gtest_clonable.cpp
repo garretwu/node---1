@@ -27,7 +27,7 @@ public:
     void set(int n) { val = n; }
     int get() { return val; }
     
-    nodec::Type<GTestClonable>::Ptr clone() {
+    nodec::Type<GTestClonable>::Ptr clone() const {
         GTestClonableImpl* x = new GTestClonableImpl;
         x->set(this->val);
         nodec::Type<GTestClonable>::Ptr p(x);

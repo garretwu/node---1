@@ -7,7 +7,7 @@ namespace nodec {
 
 class Instantiable {
 public:
-    virtual bool instanceOf(TypeId) = 0;
+    virtual bool instanceOf(TypeId) const = 0;
 };
 
 }

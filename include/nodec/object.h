@@ -19,16 +19,16 @@ class ObjectBase
 #endif
 {
 public:
-    virtual TypeId type() {
+    virtual TypeId type() const {
         return Type<T>::id();
     }
 
-    virtual bool instanceOf(TypeId id) {
+    virtual bool instanceOf(TypeId id) const {
         return id == Type<T>::id()
             || id == Type<Object>::id();
     }
     
-    virtual NODEC_CPTR(String) toString() = 0;
+    virtual NODEC_CPTR(String) toString() const = 0;
 };
 
 }

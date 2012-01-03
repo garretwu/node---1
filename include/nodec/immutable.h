@@ -12,7 +12,7 @@ class ImmutableBase
     : public GCBase
     , public ObjectBase<T> {
 public:
-    bool instanceOf(TypeId id) {
+    bool instanceOf(TypeId id) const {
         return id == Type<Immutable>::id()
             || ObjectBase<T>::instanceOf(id);
     }

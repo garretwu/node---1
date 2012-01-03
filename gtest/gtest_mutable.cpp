@@ -10,12 +10,12 @@ class GTestMutable
 class GTestMutableImpl
     : public GTestMutable {
 public:
-    nodec::Type<GTestMutable>::Ptr clone() {
+    nodec::Type<GTestMutable>::Ptr clone() const {
         nodec::Type<GTestMutable>::Ptr p(new GTestMutableImpl);
         return p;
     }
     
-    nodec::Type<nodec::String>::Cptr toString() {
+    nodec::Type<nodec::String>::Cptr toString() const {
         nodec::Type<nodec::String>::Cptr p;
         return p;
     }

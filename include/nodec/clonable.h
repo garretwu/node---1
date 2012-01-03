@@ -8,7 +8,7 @@ namespace nodec {
 template<typename T>
 class Clonable {
 public:
-    virtual NODEC_PTR_TYPE(T) clone() = 0;
+    virtual NODEC_PTR_TYPE(T) clone() const = 0;
 };
 
 }

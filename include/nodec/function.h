@@ -18,7 +18,7 @@ class FunctionBase
     : public Callable
     , public MutableBase<T> {
 public:
-    bool instanceOf(TypeId id) {
+    bool instanceOf(TypeId id) const {
         return id == Type<Function>::id()
             || MutableBase<T>::instanceOf(id);
     }

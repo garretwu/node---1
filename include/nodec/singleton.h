@@ -17,11 +17,11 @@ public:
         return &t;
     }
     
-    Type<String>::Cptr toString() {
+    Type<String>::Cptr toString() const {
         return String::create();
     }
     
-    bool instanceOf(TypeId id) {
+    bool instanceOf(TypeId id) const {
         return id == Type<Singleton>::id()
             || ObjectBase<T>::instanceOf(id);
     }

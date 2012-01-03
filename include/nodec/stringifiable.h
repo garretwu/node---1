@@ -9,7 +9,7 @@ class String;
 
 class Stringifiable {
 public:
-    virtual NODEC_CPTR(String) toString() = 0;
+    virtual NODEC_CPTR(String) toString() const = 0;
 };
 
 }

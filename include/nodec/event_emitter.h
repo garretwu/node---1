@@ -26,7 +26,7 @@ class EventEmitterBase
     : public EventEmittable
     , public MutableBase<T> {
 public:
-    bool instanceOf(TypeId id) {
+    bool instanceOf(TypeId id) const {
         return id == Type<EventEmitter>::id()
             || MutableBase<T>::instanceOf(id);
     }

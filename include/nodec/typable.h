@@ -7,7 +7,7 @@ namespace nodec {
 
 class Typable {
 public:
-    virtual TypeId type() = 0;
+    virtual TypeId type() const = 0;
 };
 
 }

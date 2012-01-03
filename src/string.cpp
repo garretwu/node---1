@@ -47,7 +47,7 @@ public:
         return str.c_str();
     }
     
-    Cptr toString() {
+    Cptr toString() const {
         return create();
     }
     

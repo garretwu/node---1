@@ -17,12 +17,12 @@ class MutableBase
 #endif
 {
 public:
-    bool instanceOf(TypeId id) {
+    bool instanceOf(TypeId id) const {
         return id == Type<Mutable>::id()
             || ObjectBase<T>::instanceOf(id);
     }
     
-    virtual NODEC_PTR_TYPE(T) clone() = 0;
+    virtual NODEC_PTR_TYPE(T) clone() const = 0;
 };
 
 #define NODEC_MUTABLE_DECLS(T) public: \

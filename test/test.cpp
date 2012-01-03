@@ -34,8 +34,8 @@ public:
     void push(Value v) { vec_.push_back(v); }
     Value pop() { return 0; }
     Type<Array>::Ptr concat(Type<Array>::Cptr) { Type<Array>::Ptr p(new ArrayImpl()); return p; }
-    Type<Array>::Ptr clone() { Type<Array>::Ptr p(new ArrayImpl()); return p; }
-    Type<String>::Cptr toString() { return String::create(); }
+    Type<Array>::Ptr clone() const { Type<Array>::Ptr p(new ArrayImpl()); return p; }
+    Type<String>::Cptr toString() const { return String::create(); }
     
 private:
     std::vector<Value> vec_;
@@ -53,8 +53,8 @@ public:
     void listen(int) {}
     void listen(Type<String>::Cptr) {}
     void close() {}
-    Type<HttpServer>::Ptr clone() { Type<HttpServer>::Ptr p(new HttpServerImpl()); return p; }
-    Type<String>::Cptr toString() { return String::create(); }
+    Type<HttpServer>::Ptr clone() const { Type<HttpServer>::Ptr p(new HttpServerImpl()); return p; }
+    Type<String>::Cptr toString() const { return String::create(); }
     
     ~HttpServerImpl() {
         std::cout << "destroy HttpServerImpl" << std::endl;
