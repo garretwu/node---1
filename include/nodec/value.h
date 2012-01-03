@@ -155,7 +155,8 @@ bool to(Value* operand, ValueType** out) {
 
 template<typename ValueType>
 inline bool to(const Value* operand, const ValueType** out) {
-    return to<ValueType>(const_cast<Value*>(operand), out);
+    typedef typename remove_const<ValueType>::type NonConst;
+    return to<NonConst>(const_cast<Value*>(operand), const_cast<ValueType**>(out));
 }
 
 template<typename ValueType>

@@ -297,6 +297,10 @@ TEST(GTestValue, Test9)
     const int* ip;
     ASSERT_TRUE(nodec::to<int>(vp, &ip));
     ASSERT_EQ(*ip, 3);
+    
+    v = 5;
+    ASSERT_TRUE(nodec::to<const int>(vp, &ip));
+    ASSERT_EQ(*ip, 5);
 }
 
 TEST(GTestAny, Test9)
