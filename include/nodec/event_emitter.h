@@ -15,12 +15,13 @@ template<typename T>
 class EventEmitterBase
     : public MutableBase<T> {
 public:
-    virtual void addListener(Type<String>::Cptr event, Type<Function>::Ptr func) = 0;
-    virtual void removeListerner(Type<String>::Cptr event, Type<Function>::Cptr func) = 0;
-    virtual void removeAllListener() = 0;
-    virtual void removeAllListener(Type<String>::Cptr event);
-    virtual void emit(Type<String>::Cptr event, Type<Array>::Cptr args) = 0;
-    virtual Type<Array>::Ptr listeners(Type<String>::Cptr event) = 0;
+    // TODO: implement the following methods
+    virtual void addListener(Type<String>::Cptr event, Type<Function>::Ptr func) {}
+    virtual void removeListerner(Type<String>::Cptr event, Type<Function>::Cptr func) {}
+    virtual void removeAllListener() {}
+    virtual void removeAllListener(Type<String>::Cptr event) {}
+    virtual void emit(Type<String>::Cptr event, Type<Array>::Cptr args) {}
+    virtual Type<Array>::Ptr listeners(Type<String>::Cptr event) { return Array::create(); }
     
     bool instanceOf(TypeId id) const {
         return id == Type<EventEmitter>::id()

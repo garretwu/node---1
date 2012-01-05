@@ -7,14 +7,21 @@ namespace nodec {
 
 class String : NODEC_IMMUTABLE(String)
 public:
-    static Cptr create(const char*);
+    enum Encoding {
+        ASCII,
+        UTF8,
+        UTF16,
+        UTF32,
+    };
+    
+    static Cptr create(const Byte*, Encoding, Size = 0);
 
     virtual Size length() const = 0;
     virtual Char charAt(Size) const = 0;
     virtual Cptr substring(Size) const = 0;
     virtual Cptr substring(Size, Size) const = 0;
     virtual Cptr concat(Cptr) const = 0;
-    virtual bool compareTo(Cptr) const = 0;
+    virtual Int compareTo(Cptr) const = 0;
     virtual bool startsWith(Cptr) const = 0;
     virtual bool startsWith(Cptr, Size) const = 0;
     virtual bool endsWith(Cptr) const = 0;

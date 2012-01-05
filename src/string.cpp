@@ -29,7 +29,7 @@ public:
         return p;
     }
     
-    bool compareTo(Cptr) const { return false; }
+    Int compareTo(Cptr) const { return 0; }
     bool startsWith(Cptr) const { return false; }
     bool startsWith(Cptr, Size) const { return false; }
     bool endsWith(Cptr) const { return false; }
@@ -66,10 +66,10 @@ protected:
 class Utf32String : public StringImpl<uint32_t> {
 public:
     static Cptr create() { Cptr p(new Utf32String()); return p; }
-    static Cptr create(const char* s) { Cptr p(new Utf32String()); return p; }
+    static Cptr create(const Byte* data, Encoding enc, Size max) { Cptr p(new Utf32String()); return p; }
 };
 
 Type<String>::Cptr String::create() { return Utf32String::create(); }
-Type<String>::Cptr String::create(const char* s) { return Utf32String::create(s); }
+Type<String>::Cptr String::create(const Byte* data, Encoding enc, Size max) { return Utf32String::create(data, enc, max); }
 
 }

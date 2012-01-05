@@ -7,6 +7,8 @@
 namespace nodec {
 
 typedef size_t Size;
+typedef uint8_t Byte;
+typedef int32_t Int;
 typedef uint32_t Char;
 typedef uintptr_t TypeId;
 

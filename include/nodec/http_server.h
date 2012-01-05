@@ -1,14 +1,13 @@
 #ifndef _NODEC_HTTP_SERVER_H_
 #define _NODEC_HTTP_SERVER_H_
 
-#include "mutable.h"
-#include "string.h"
+#include "event_emitter.h"
 
 namespace nodec {
 
-class HttpServer : NODEC_MUTABLE(HttpServer)
+class HttpServer : NODEC_EVENT_EMITTER(HttpServer)
 public:
-    virtual void listen(int) = 0;
+    virtual void listen(Int) = 0;
     virtual void listen(Type<String>::Cptr) = 0;
     virtual void close() = 0;
 };
