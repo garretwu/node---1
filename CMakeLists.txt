@@ -37,7 +37,7 @@ add_executable(nodec-with-sp
 	src/string.cpp
 )
 
-set_target_properties(nodec-shared_ptr-test
+set_target_properties(nodec-with-sp
 	PROPERTIES COMPILE_FLAGS "-fno-rtti -fno-exceptions") 
 
 # with boehm gc
@@ -49,9 +49,9 @@ add_executable(nodec-with-gc
 	src/string.cpp
 )
 
-target_link_libraries(nodec-gc-test
+target_link_libraries(nodec-with-gc
 	gc
 )
 
-set_target_properties(nodec-gc-test
+set_target_properties(nodec-with-gc
 	PROPERTIES COMPILE_FLAGS "-fno-rtti -fno-exceptions -DNODEC_USE_BOEHM_GC")
