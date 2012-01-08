@@ -19,11 +19,6 @@ public:
     
 private:
     std::vector<Value> vec_;
-    
-public:
-    ~ArrayImpl() {
-        std::cout << "destruct ArrayImpl" << std::endl;
-    }
 };
 
 Type<Array>::Ptr Array::create() { Type<Array>::Ptr p(new ArrayImpl()); return p; }
