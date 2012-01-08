@@ -17,6 +17,7 @@ add_executable(nodec-gtest
 	gtest/gtest_value.cpp
 	src/no_exceptions.cpp
 	src/string.cpp
+	src/array.cpp
 )
 
 target_link_libraries(nodec-gtest
@@ -28,6 +29,7 @@ add_executable(nodec-shared_ptr-test
 	test/test.cpp
 	src/no_exceptions.cpp
 	src/string.cpp
+	src/array.cpp
 )
 
 set_target_properties(nodec-shared_ptr-test
@@ -38,6 +40,7 @@ add_executable(nodec-gc-test
 	test/test.cpp
 	src/no_exceptions.cpp
 	src/string.cpp
+	src/array.cpp
 )
 
 target_link_libraries(nodec-gc-test
