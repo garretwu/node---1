@@ -1,5 +1,6 @@
 #include <vector>
 #include <nodec/array.h>
+#include <nodec/string.h>
 
 namespace nodec {
 
