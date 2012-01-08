@@ -10,6 +10,7 @@ namespace nodec {
 
 enum Category {
     PRIMITIVE,
+    OBJECT,
     MUTABLE,
     IMMUTABLE,
     SINGLETON,
@@ -34,10 +35,18 @@ template<typename T, Category =
                 ? IMMUTABLE
                 : boost::is_base_of<Singleton, T>::value
                     ? SINGLETON
-                    : UNDEFINED
+                    : OBJECT
         : PRIMITIVE>
 class Type {
 public:
+    NODEC_TYPE_ID();
+};
+
+template<typename T>
+class Type<T, OBJECT> {
+public:
+    typedef NODEC_PTR_TYPE(T) Ptr;
+    typedef NODEC_CPTR_TYPE(T) Cptr;
     NODEC_TYPE_ID();
 };
 
