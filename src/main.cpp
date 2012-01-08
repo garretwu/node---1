@@ -1,5 +1,5 @@
 #ifdef NODEC_USE_BOEHM_GC
-#include "gc.h"
+#include <gc.h>
 #endif
 
 int main() {
