@@ -28,11 +28,11 @@ target_link_libraries(nodec-gtest
 set_target_properties(nodec-gtest
 	PROPERTIES COMPILE_FLAGS "-DNODEC_GTEST_BUILD_ERRORS")
 
-# shared_ptr test
-add_executable(nodec-shared_ptr-test
-	test/test.cpp
+# with shared_ptr
+add_executable(nodec-with-sp
 	src/array.cpp
 	src/http_server.cpp
+	src/main.cpp
 	src/no_exceptions.cpp
 	src/string.cpp
 )
@@ -40,11 +40,11 @@ add_executable(nodec-shared_ptr-test
 set_target_properties(nodec-shared_ptr-test
 	PROPERTIES COMPILE_FLAGS "-fno-rtti -fno-exceptions") 
 
-# gc test
-add_executable(nodec-gc-test
-	test/test.cpp
+# with boehm gc
+add_executable(nodec-with-gc
 	src/array.cpp
 	src/http_server.cpp
+	src/main.cpp
 	src/no_exceptions.cpp
 	src/string.cpp
 )
