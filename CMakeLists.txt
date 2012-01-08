@@ -15,21 +15,26 @@ add_executable(nodec-gtest
 	gtest/gtest_mutable.cpp
 	gtest/gtest_noncopyable.cpp
 	gtest/gtest_value.cpp
+	src/array.cpp
+	src/http_server.cpp
 	src/no_exceptions.cpp
 	src/string.cpp
-	src/array.cpp
 )
 
 target_link_libraries(nodec-gtest
 	gtest
 )
 
+set_target_properties(nodec-gtest
+	PROPERTIES COMPILE_FLAGS "-DNODEC_GTEST_BUILD_ERRORS")
+
 # shared_ptr test
 add_executable(nodec-shared_ptr-test
 	test/test.cpp
+	src/array.cpp
+	src/http_server.cpp
 	src/no_exceptions.cpp
 	src/string.cpp
-	src/array.cpp
 )
 
 set_target_properties(nodec-shared_ptr-test
@@ -38,9 +43,10 @@ set_target_properties(nodec-shared_ptr-test
 # gc test
 add_executable(nodec-gc-test
 	test/test.cpp
+	src/array.cpp
+	src/http_server.cpp
 	src/no_exceptions.cpp
 	src/string.cpp
-	src/array.cpp
 )
 
 target_link_libraries(nodec-gc-test

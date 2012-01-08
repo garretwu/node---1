@@ -18,25 +18,6 @@
 #include "javaxfc.h"
 #endif
 
-namespace nodec {
-
-class HttpServerImpl : public HttpServer {
-public:
-    void listen(int) {}
-    void listen(Type<String>::Cptr) {}
-    void close() {}
-    Type<HttpServer>::Ptr clone() const { Type<HttpServer>::Ptr p(new HttpServerImpl()); return p; }
-    Type<String>::Cptr toString() const { return String::create(); }
-    
-    ~HttpServerImpl() {
-        std::cout << "destroy HttpServerImpl" << std::endl;
-    }
-};
-
-Type<HttpServer>::Ptr HttpServer::create() { Type<HttpServer>::Ptr p(new HttpServerImpl()); return p; }
-
-}
-
 #include <iostream>
 
 int main() {
@@ -96,7 +77,7 @@ int main() {
          << json->instanceOf(Type<Singleton>::id()) << " "
          << json->instanceOf(Type<Immutable>::id()) << endl;
 
-#if NODEC_USE_BOEHM_BC    
+#ifdef NODEC_USE_BOEHM_GC
     GC_gcollect();
 #endif
 
