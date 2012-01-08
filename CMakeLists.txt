@@ -10,7 +10,6 @@ include_directories(
 # gtest
 add_executable(nodec-gtest
 	gtest/gtest_main.cpp
-	gtest/gtest_clonable.cpp
 	gtest/gtest_immutable.cpp
 	gtest/gtest_mutable.cpp
 	gtest/gtest_noncopyable.cpp

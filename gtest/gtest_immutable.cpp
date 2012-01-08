@@ -2,13 +2,10 @@
 #include <nodec/immutable.h>
 #include <nodec/string.h>
 
-class GTestImmutable
-    : public nodec::Immutable
-    , public nodec::ImmutableBase<GTestImmutable> {
+class GTestImmutable : NODEC_IMMUTABLE(GTestImmutable)
 };
 
-class GTestImmutableImpl
-    : public GTestImmutable {
+class GTestImmutableImpl : public GTestImmutable {
 public:
     nodec::Type<nodec::String>::Cptr toString() const {
         nodec::Type<nodec::String>::Cptr p;

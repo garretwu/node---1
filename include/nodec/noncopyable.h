@@ -3,7 +3,6 @@
 
 namespace nodec {
 
-template<typename T>
 class NonCopyable {
 protected:
     NonCopyable() {}

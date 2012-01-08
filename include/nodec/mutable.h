@@ -4,34 +4,36 @@
 #include "value.h"
 #include "object.h"
 #include "gc_base.h"
-#include "clonable.h"
 
 namespace nodec {
 
-template<typename T>
 class MutableBase
-    : public GCBase
-    , public ObjectBase<T>
-#ifdef NODEC_USE_EXPLICIT_IF
-    , public Clonable<T>
-#endif
+    : public Mutable
+    , public GCBase
+    , public ObjectBase
 {
 public:
     bool instanceOf(TypeId id) const {
         return id == Type<Mutable>::id()
-            || ObjectBase<T>::instanceOf(id);
+            || ObjectBase::instanceOf(id);
     }
-    
-    virtual NODEC_PTR_TYPE(T) clone() const = 0;
 };
 
-#define NODEC_MUTABLE_DECLS(T) public: \
+#define NODEC_MUTABLE_DECLS(T, B) public: \
     typedef NODEC_PTR(T) Ptr; \
     typedef NODEC_CPTR(T) Cptr; \
-    static Ptr create();
+    static Ptr create(); \
+    Ptr clone() const; \
+    nodec::TypeId type() const { \
+        return nodec::Type<T>::id(); \
+    } \
+    bool instanceOf(nodec::TypeId id) const { \
+        return id == type() \
+            || B::instanceOf(id); \
+    }
 
-#define NODEC_MUTABLE(T) public Mutable, public MutableBase<T> { \
-    NODEC_MUTABLE_DECLS(T)
+#define NODEC_MUTABLE(T) public nodec::MutableBase { \
+    NODEC_MUTABLE_DECLS(T, nodec::MutableBase)
 
 }
 

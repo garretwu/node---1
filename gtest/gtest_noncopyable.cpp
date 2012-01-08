@@ -9,10 +9,10 @@
 #ifdef NODEC_GTEST_NONCOPYABLE_BUILD_ERRORS
 TEST(GTestNonCopyable, Error)
 {
-    nodec::NonCopyable<int> nc;
+    nodec::NonCopyable nc;
 }
 
-class GTestNC : private nodec::NonCopyable<GTestNC> {
+class GTestNC : private nodec::NonCopyable {
 //class GTestNC : private boost::noncopyable {
 };
 

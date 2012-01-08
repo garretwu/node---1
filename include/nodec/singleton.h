@@ -10,7 +10,7 @@ namespace nodec {
 template<typename T>
 class SingletonBase
     : public Singleton
-    , public ObjectBase<T> {
+    , public ObjectBase {
 public:
     static T* instance() {
         static T t;
@@ -23,7 +23,7 @@ public:
     
     bool instanceOf(TypeId id) const {
         return id == Type<Singleton>::id()
-            || ObjectBase<T>::instanceOf(id);
+            || ObjectBase::instanceOf(id);
     }
 
 protected:
@@ -31,14 +31,18 @@ protected:
     virtual ~SingletonBase() {}
 };
 
-#define NODEC_SINGLETON(T) public SingletonBase<T> { \
+#define NODEC_SINGLETON(T) public SingletonBase { \
 private: \
     friend class SingletonBase<T>; \
     T() : SingletonBase<T>() {} \
     ~T() {} \
 public: \
     typedef T* Ptr; \
-    typedef const T* Cptr;
+    typedef const T* Cptr; \
+    bool instanceOf(TypeId id) const { \
+        return id == Type<T>::id() \
+            || SingletonBase::instanceOf(id); \
+    }
 
 }
 

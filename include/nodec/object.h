@@ -9,9 +9,8 @@
 
 namespace nodec {
 
-template<typename T>
 class ObjectBase
-    : private NonCopyable<T>
+    : private NonCopyable
 #ifdef NODEC_USE_EXPLICIT_IF
     , public Typable
     , public Instantiable
@@ -19,13 +18,10 @@ class ObjectBase
 #endif
 {
 public:
-    virtual TypeId type() const {
-        return Type<T>::id();
-    }
+    virtual TypeId type() const = 0;
 
     virtual bool instanceOf(TypeId id) const {
-        return id == Type<T>::id()
-            || id == Type<Object>::id();
+        return id == Type<Object>::id();
     }
     
     virtual NODEC_CPTR(String) toString() const = 0;

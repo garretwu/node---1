@@ -5,24 +5,13 @@
 
 namespace nodec {
 
-class Function
-    : public Mutable {
-};
-
-template<typename T>
-class FunctionBase
-    : public MutableBase<T> {
+class Function : NODEC_MUTABLE(Function)
 public:
     virtual Value operator()(Value) = 0;
-    
-    bool instanceOf(TypeId id) const {
-        return id == Type<Function>::id()
-            || MutableBase<T>::instanceOf(id);
-    }
 };
 
-#define NODEC_FUNCTION(T) public Function, public FunctionBase<T> { \
-    NODEC_MUTABLE_DECLS(T)
+#define NODEC_FUNCTION(T) public nodec::Function { \
+    NODEC_MUTABLE_DECLS(T, nodec::Function)
 
 }
 

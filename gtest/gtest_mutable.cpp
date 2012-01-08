@@ -2,9 +2,7 @@
 #include <nodec/mutable.h>
 #include <nodec/string.h>
 
-class GTestMutable
-    : public nodec::Mutable
-    , public nodec::MutableBase<GTestMutable> {
+class GTestMutable : NODEC_MUTABLE(GTestMutable)
 };
 
 class GTestMutableImpl

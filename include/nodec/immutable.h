@@ -7,23 +7,30 @@
 
 namespace nodec {
 
-template<typename T>
 class ImmutableBase
-    : public GCBase
-    , public ObjectBase<T> {
+    : public Immutable
+    , public GCBase
+    , public ObjectBase {
 public:
     bool instanceOf(TypeId id) const {
         return id == Type<Immutable>::id()
-            || ObjectBase<T>::instanceOf(id);
+            || ObjectBase::instanceOf(id);
     }
 };
 
-#define NODEC_IMMUTABLE_DECLS(T) public: \
+#define NODEC_IMMUTABLE_DECLS(T, B) public: \
     typedef NODEC_CPTR(T) Cptr; \
-    static Cptr create();
+    static Cptr create(); \
+    nodec::TypeId type() const { \
+        return nodec::Type<T>::id(); \
+    } \
+    bool instanceOf(nodec::TypeId id) const { \
+        return id == type() \
+            || B::instanceOf(id); \
+    }
 
-#define NODEC_IMMUTABLE(T) public Immutable, public ImmutableBase<T> { \
-    NODEC_IMMUTABLE_DECLS(T)
+#define NODEC_IMMUTABLE(T) public nodec::ImmutableBase { \
+    NODEC_IMMUTABLE_DECLS(T, nodec::ImmutableBase)
 
 }
 
