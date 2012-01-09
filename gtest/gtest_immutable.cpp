@@ -20,6 +20,11 @@ public:
 
 int GTestImmutableImpl::count = 0;
 
+nodec::Type<GTestImmutable>::Cptr GTestImmutable::create() {
+    nodec::Type<GTestImmutable>::Cptr p(new GTestImmutableImpl);
+    return p;
+}
+
 #ifdef NODEC_GTEST_BUILD_ERRORS
 //#define NODEC_GTEST_IMMUTABLE_BUILD_ERRORS
 #endif
@@ -32,32 +37,51 @@ TEST(GTestImmutalbe, Error)
 
 TEST(GTestImmutable, Error2)
 {
-    nodec::Type<GTestImmutable>::Cptr p(new GTestImmutableImpl());
+    nodec::Type<GTestImmutable>::Cptr p = GTestImmutable::create();
     nodec::Type<nodec::Object>::Ptr p2 = p;
+}
+
+TEST(GTestImmutable, Error3)
+{
+    nodec::Type<GTestImmutable>::Cptr p = GTestImmutable::create();
+    nodec::Type<nodec::Mutable>::Cptr p2 = p;
+}
+
+TEST(GTestImmutable, Error4)
+{
+    // noncopyable
+    GTestImmutableImpl x, y = x;
+}
+
+TEST(GTestMutable, Error5)
+{
+    // noncopyable
+    GTestMutableImpl x, y;
+    x = y;
 }
 #endif
 
-class GTestImmutableBase {
+class GTestImmutableX {
     virtual int x() {}
 };
 
 TEST(GTestImmutable, Test)
 {
     // check EBCO
-    ASSERT_EQ(sizeof(GTestImmutableImpl), sizeof(nodec::GCBase) + sizeof(GTestImmutableBase));
+    ASSERT_EQ(sizeof(GTestImmutableImpl), sizeof(nodec::GCBase) + sizeof(GTestImmutableX));
 }
 
 TEST(GTestImmutable, Test2)
 {
     // no build errors
-    nodec::Type<GTestImmutable>::Cptr p(new GTestImmutableImpl());
+    nodec::Type<GTestImmutable>::Cptr p = GTestImmutable::create();
     nodec::Type<nodec::Immutable>::Cptr p2 = p;
     nodec::Type<nodec::Object>::Cptr p3 = p;
 }
 
 TEST(GTestImmutable, Test3)
 {
-    nodec::Type<GTestImmutable>::Cptr p(new GTestImmutableImpl());
+    nodec::Type<GTestImmutable>::Cptr p = GTestImmutable::create();
     ASSERT_TRUE(p->instanceOf(nodec::Type<GTestImmutable>::id()));
     ASSERT_TRUE(p->instanceOf(nodec::Type<nodec::Immutable>::id()));
     ASSERT_TRUE(p->instanceOf(nodec::Type<nodec::Object>::id()));
@@ -67,7 +91,7 @@ TEST(GTestImmutable, Test3)
 TEST(GTestImmutable, Test4)
 {
     {
-        nodec::Type<GTestImmutable>::Cptr p(new GTestImmutableImpl());
+        nodec::Type<GTestImmutable>::Cptr p = GTestImmutable::create();
         ASSERT_EQ(p.use_count(), 1);
         ASSERT_EQ(GTestImmutableImpl::count, 1);
     }

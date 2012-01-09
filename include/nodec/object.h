@@ -1,8 +1,8 @@
 #ifndef _NODEC_OBJECT_H_
 #define _NODEC_OBJECT_H_
 
+#include <boost/utility.hpp>
 #include "type.h"
-#include "noncopyable.h"
 #include "typable.h"
 #include "instantiable.h"
 #include "stringifiable.h"
@@ -10,7 +10,7 @@
 namespace nodec {
 
 class ObjectBase
-    : private NonCopyable
+    : private boost::noncopyable
 #ifdef NODEC_USE_EXPLICIT_IF
     , public Typable
     , public Instantiable

@@ -12,7 +12,6 @@ add_executable(nodec-gtest
 	gtest/gtest_main.cpp
 	gtest/gtest_immutable.cpp
 	gtest/gtest_mutable.cpp
-	gtest/gtest_noncopyable.cpp
 	gtest/gtest_value.cpp
 	src/array.cpp
 	src/http_server.cpp
