@@ -3,19 +3,13 @@
 
 #include <boost/utility.hpp>
 #include "type.h"
-#include "typable.h"
-#include "instantiable.h"
-#include "stringifiable.h"
+#include "pointer.h"
 
 namespace nodec {
 
-class ObjectBase
-    : private boost::noncopyable
-#ifdef NODEC_USE_EXPLICIT_IF
-    , public Typable
-    , public Instantiable
-    , public Stringifiable
-#endif
+class String;
+
+class ObjectBase : private boost::noncopyable
 {
 public:
     virtual TypeId type() const = 0;
