@@ -14,7 +14,6 @@ TEST(GTestSingleton, Test)
     ASSERT_EQ(sizeof(GTestSingleton), sizeof(GTestSingletonX));
 }
 
-/*
 TEST(GTestSingleton, Test2)
 {
     // no build errors
@@ -24,5 +23,3 @@ TEST(GTestSingleton, Test2)
     nodec::Type<nodec::Object>::Ptr p4(p);
     nodec::Type<nodec::Object>::Cptr p5(p);
 }
-*/
-

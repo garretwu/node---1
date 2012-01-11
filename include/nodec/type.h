@@ -68,8 +68,8 @@ public:
 template<typename T>
 class Type<T, SINGLETON> {
 public:
-    typedef T* Ptr;
-    typedef const T* Cptr;
+    typedef NODEC_PTR_TYPE(T) Ptr;
+    typedef NODEC_CPTR_TYPE(T) Cptr;
     NODEC_TYPE_ID();
 };
 
