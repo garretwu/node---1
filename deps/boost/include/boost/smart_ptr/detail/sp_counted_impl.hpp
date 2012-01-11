@@ -150,11 +150,7 @@ public:
 
     virtual void * get_deleter( detail::sp_typeinfo const & ti )
     {
-#ifdef NODEC_DISABLE_BOOST_SP_GET_DELETER
-        return 0;
-#else
         return ti == BOOST_SP_TYPEID(D)? &reinterpret_cast<char&>( del ): 0;
-#endif
     }
 
 #if defined(BOOST_SP_USE_STD_ALLOCATOR)
@@ -228,11 +224,7 @@ public:
 
     virtual void * get_deleter( detail::sp_typeinfo const & ti )
     {
-#ifdef NODEC_DISABLE_BOOST_SP_GET_DELETER
-        return 0;
-#else
         return ti == BOOST_SP_TYPEID( D )? &reinterpret_cast<char&>( d_ ): 0;
-#endif
     }
 };
 
