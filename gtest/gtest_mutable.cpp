@@ -94,6 +94,15 @@ TEST(GTestMutable, Test4)
         nodec::Type<GTestMutable>::Ptr p = GTestMutable::create();
         ASSERT_EQ(p.use_count(), 1);
         ASSERT_EQ(GTestMutableImpl::count, 1);
+        
+        nodec::Type<GTestMutable>::Ptr p2 = GTestMutable::create();
+        ASSERT_EQ(p2.use_count(), 1);
+        ASSERT_EQ(GTestMutableImpl::count, 2);
+        
+        p = p2;
+        ASSERT_EQ(p.use_count(), 2);
+        ASSERT_EQ(p2.use_count(), 2);
+        ASSERT_EQ(GTestMutableImpl::count, 1);
     }
     ASSERT_EQ(GTestMutableImpl::count, 0);
 }

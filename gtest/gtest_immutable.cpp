@@ -94,6 +94,15 @@ TEST(GTestImmutable, Test4)
         nodec::Type<GTestImmutable>::Cptr p = GTestImmutable::create();
         ASSERT_EQ(p.use_count(), 1);
         ASSERT_EQ(GTestImmutableImpl::count, 1);
+        
+        nodec::Type<GTestImmutable>::Cptr p2 = GTestImmutable::create();
+        ASSERT_EQ(p2.use_count(), 1);
+        ASSERT_EQ(GTestImmutableImpl::count, 2);
+        
+        p = p2;
+        ASSERT_EQ(p.use_count(), 2);
+        ASSERT_EQ(p2.use_count(), 2);
+        ASSERT_EQ(GTestImmutableImpl::count, 1);
     }
     ASSERT_EQ(GTestImmutableImpl::count, 0);
 }
