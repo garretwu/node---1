@@ -31,10 +31,10 @@ protected:
     virtual ~SingletonBase() {}
 };
 
-#define NODEC_SINGLETON(T) public SingletonBase<T> { \
+#define NODEC_SINGLETON(T) public nodec::SingletonBase<T> { \
 private: \
-    friend class SingletonBase<T>; \
-    T() : SingletonBase<T>() {} \
+    friend class nodec::SingletonBase<T>; \
+    T() : nodec::SingletonBase<T>() {} \
     ~T() {} \
 public: \
     typedef T* Ptr; \
@@ -42,9 +42,9 @@ public: \
     nodec::TypeId type() const { \
         return nodec::Type<T>::id(); \
     } \
-    bool instanceOf(TypeId id) const { \
+    bool instanceOf(nodec::TypeId id) const { \
         return id == type() \
-            || SingletonBase<T>::instanceOf(id); \
+            || nodec::SingletonBase<T>::instanceOf(id); \
     }
 
 }
